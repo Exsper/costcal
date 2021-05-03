@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<noscript>Your browser does not support JavaScript!</noscript>
+
+<head>
+    <title>cost计算器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <script type="text/javascript" src="./common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./PPPlus.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    <span>pp+</span>
+                </td>
+                <td>
+                    <span style="float:left">0</span>
+                    <span style="float:right">10000</span>
+                </td>
+                <td style="text-align: center;">
+                    <span>数值</span>
+                </td>
+                <td>
+                    <span>你也可以直接把PP+页面的数据复制过来</span>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span>Jump (锐角移动能力)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="AimJump" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('AimJump')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="AimJump-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('AimJump')">
+                </td>
+                <td rowspan="6">
+                    <textarea id="PPPlusTextInput" style="width: 100%; height:100%" rows="10"
+                        onchange="ppplusTextInput()">
+Aim (Total):	2,389pp
+Aim (Jump):	2,384pp
+Aim (Flow):	417pp
+Precision:	515pp
+Speed:	1,283pp
+Stamina:	865pp
+Accuracy:	1,833pp
+Sum:	7,297pp
+Average:	1,216pp
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Flow (间距连打能力)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="AimFlow" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('AimFlow')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="AimFlow-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('AimFlow')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Precision (小圈精确度)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="Precision" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('Precision')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="Precision-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('Precision')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Speed (整体手速能力)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="Speed" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('Speed')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="Speed-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('Speed')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Stamina (长串稳定能力)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="Stamina" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('Stamina')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="Stamina-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('Stamina')">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Accuracy (点击精确度)：</span>
+                </td>
+                <td>
+                    <input type="range" class="range" id="Accuracy" value="1000" min="0" max="10000" step="100"
+                        oninput="changeR('Accuracy')" onchange="calcost()">
+                </td>
+                <td>
+                    <input type="number" class="number" id="Accuracy-Text" value="1000" min="0" max="20000" step="100"
+                        onchange="changeT('Accuracy')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="result">
+        <table>
+            <tr>
+                <td style="width: 200px; height: 200px;">
+                    <textarea id="resultText" style="width: 200px; height: 200px;">这里是结果</textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function ppplusTextInput() {
+            let s = $("#PPPlusTextInput").val();
+            s = s.replace(/,/g, "");
+            $("#AimJump-Text").val(/Aim \(Jump\)[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+            $("#AimFlow-Text").val(/Aim \(Flow\)[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+            $("#Precision-Text").val(/Precision[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+            $("#Speed-Text").val(/Speed[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+            $("#Stamina-Text").val(/Stamina[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+            $("#Accuracy-Text").val(/Accuracy[^0-9]+([0-9]+)pp/.exec(s)[1]).change();
+        }
+
+        function changeR(id) {
+            const range = $("#" + id);
+            const rangeText = $("#" + id + "-Text");
+            const val = parseInt(range.val());
+            rangeText.val(val);
+        }
+        function changeT(id) {
+            const range = $("#" + id);
+            const rangeText = $("#" + id + "-Text");
+            const val = parseInt(rangeText.val());
+            range.val(val);
+            calcost();
+        }
+        function calcost() {
+            let data = {};
+            data.AimJump = parseInt($("#AimJump-Text").val());
+            data.AimFlow = parseInt($("#AimFlow-Text").val());
+            data.Precision = parseInt($("#Precision-Text").val());
+            data.Speed = parseInt($("#Speed-Text").val());
+            data.Stamina = parseInt($("#Stamina-Text").val());
+            data.Accuracy = parseInt($("#Accuracy-Text").val());
+            let costInfo = new PPPlus(data);
+            $("#resultText").val(costInfo.OutputText());
+        }
+
+    </script>
+
+</body>
+
+</html>
