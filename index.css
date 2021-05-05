@@ -2,4 +2,13 @@
     width: 500px;
 }
 
+#excel {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
 
+#excel td {
+    border-left: 1px solid #000;
+    border-top: 1px solid #000
+}

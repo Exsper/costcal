@@ -133,6 +133,36 @@ Average:	1,216pp
                 <td style="width: 200px; height: 200px;">
                     <textarea id="resultText" style="width: 200px; height: 200px;">这里是结果</textarea>
                 </td>
+                <td>
+                    <table id="excel" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <td><span>Jump</span></td>
+                                <td><span>Flow</span></td>
+                                <td><span>Precision</span></td>
+                                <td><span>Speed</span></td>
+                                <td><span>Stamina</span></td>
+                                <td><span>Accuracy</span></td>
+                                <td><span>OCL Cost</span></td>
+                                <td><span>Drug Cost</span></td>
+                                <td><span>MP4 Cost</span></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="Excel-Jump"></span></td>
+                                <td><span id="Excel-Flow"></span></td>
+                                <td><span id="Excel-Precision"></span></td>
+                                <td><span id="Excel-Speed"></span></td>
+                                <td><span id="Excel-Stamina"></span></td>
+                                <td><span id="Excel-Accuracy"></span></td>
+                                <td><span id="Excel-OCL"></span></td>
+                                <td><span id="Excel-Drug"></span></td>
+                                <td><span id="Excel-MP4"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
         </table>
     </div>
@@ -172,6 +202,15 @@ Average:	1,216pp
             data.Accuracy = parseInt($("#Accuracy-Text").val());
             let costInfo = new PPPlus(data);
             $("#resultText").val(costInfo.OutputText());
+            $("#Excel-Jump").text(data.AimJump);
+            $("#Excel-Flow").text(data.AimFlow);
+            $("#Excel-Precision").text(data.Precision);
+            $("#Excel-Speed").text(data.Speed);
+            $("#Excel-Stamina").text(data.Stamina);
+            $("#Excel-Accuracy").text(data.Accuracy);
+            $("#Excel-OCL").text(costInfo.valOCLCost);
+            $("#Excel-Drug").text(costInfo.valDrugCost);
+            $("#Excel-MP4").text(costInfo.valMP4Cost);
         }
 
     </script>

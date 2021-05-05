@@ -16,6 +16,10 @@ class PPPlus {
         this.Speed = data.Speed;
         this.Stamina = data.Stamina;
         this.Accuracy = data.Accuracy;
+
+        this.valOCLCost = this.OCLCost().toFixed(4);
+        this.valDrugCost = this.DrugCost().toFixed(4);
+        this.valMP4Cost = this.MP4Cost().toFixed(4);
     }
 
     F1(x) {
@@ -60,9 +64,6 @@ class PPPlus {
     }
 
     OutputText() {
-        const valOCLCost = this.OCLCost().toFixed(4);
-        const valDrugCost = this.DrugCost().toFixed(4);
-        const valMP4Cost = this.MP4Cost().toFixed(4);
         let output = "";
         output = output + "Jump: " + this.AimJump + "\n";
         output = output + "Flow: " + this.AimFlow + "\n";
@@ -71,9 +72,9 @@ class PPPlus {
         output = output + "Speed: " + this.Speed + "\n";
         output = output + "Stamina: " + this.Stamina + "\n";
         output = output + "\n";
-        output = output + "OCL Cost: " + valOCLCost + "\n";
-        output = output + "毒品杯 Cost: " + valDrugCost + "\n";
-        output = output + "MP4 Cost: " + valMP4Cost + "\n";
+        output = output + "OCL Cost: " + this.valOCLCost + "\n";
+        output = output + "Drug Cost: " + this.valDrugCost + "\n";
+        output = output + "MP4 Cost: " + this.valMP4Cost + "\n";
         return output;
     }
 
